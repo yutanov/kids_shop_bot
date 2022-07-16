@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Admin panel
+{% endblock %}
+
+{% block content %}
+          {% if user.is_authenticated %}
+          <div class="jumbotron">
+            <h3>Категории</h3>
+            {% if category_list %}
+              <div class="row">
+              {% for el in category_list %}
+                  <div class="col-md-4">
+                     <div class="border border-secondary">
+                        <a class="navbar-brand text-dark" href="{% url 'category_view' el.id %}">{{ el.title }}</a>
+                     </div>
+                    <br>
+                  </div>
+              {% endfor %}
+              </div>
+            {% else %}
+              <p>На данный момент нет ни одной категории товаров</p>
+            {% endif %}
+          </div>
+          {% else %}
+            <h1>Login</h1>
+            <p>Please, use the following form to log-in:</p>
+            <form action="{% url 'login' %}" method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+            <p><input type="submit" value="Login"></p>
+            </form>
+          {% endif %}
+{% endblock %}

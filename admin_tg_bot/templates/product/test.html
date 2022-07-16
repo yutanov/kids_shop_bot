@@ -1,0 +1,5 @@
+    <form action="" method="post" enctype="multipart/form-data" class="form-inline">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="btn btn-outline-primary btn-sm" value="Добавить" />
+    </form>

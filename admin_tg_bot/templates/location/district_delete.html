@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регионы
+{% endblock %}
+
+{% block content %}
+    {{ form.error }}
+    <h3>Удалить </h3>
+    <form action="" method="post">{% csrf_token %}
+      <p>Вы уверены, что хотите удалить регион "{{ region.title }}"?</p>
+      <input type="submit" class="btn btn-outline-primary btn-sm" value="Удалить" />
+      <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'region_list' %}">Назад</a></p>
+    </form>
+{% endblock content %}

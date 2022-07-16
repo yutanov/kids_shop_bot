@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Категории
+{% endblock %}
+
+{% block content %}
+<h3>{{ category.title }}</h3>
+{% if products %}
+   <div class="row">
+   {% for product in products %}
+      <div class="col-md-4">
+         <div class="border border-secondary">
+            <div class="border align-content-center">
+            <h4><a class="navbar-brand text-dark" href="{% url 'product_view' product.id %}">{{ product.title }}</a></h4><br>
+            {% if product.image %}
+            <a href="{% url 'product_view' product.id %}"><img src="{{ product.image.url }}" width="300" height="300" alt="img"></a><br>
+            {% endif %}
+            <p>{{ product.description }}</p>
+            <p>{{ product.gender }}</p>
+            <p>Цена: {{ product.price }}</p><br>
+            </div>
+         </div>
+      </div>
+      <br>
+   {% endfor %}
+   </div>
+   <br>
+{% endif %}
+<p><a class="btn btn-outline-primary btn-sm m-1" href="{% url 'product_new' %}">Добавить товар</a>
+   <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'category_edit' category.pk %}">Изменить категорию</a>
+   <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'category_delete' category.pk %}">Удалить категорию</a>
+   <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'category_list' %}">Назад</a></p>
+{% endblock %}
+

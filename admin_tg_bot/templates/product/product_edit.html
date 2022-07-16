@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Товары
+{% endblock %}
+
+{% block content %}
+    <h3>Изменить товар</h3>
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="id_title">Название товара</label>
+      <input type="text" name="{{ form.title.name }}" class="form-control" required id="id_title" value="{{ title }}">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="id_category">Категория</label>
+      <select id="id_category" name="{{ form.category.name }}" class="form-control" required>
+      <option value="">Выберите...</option>
+        <option value="{{ category }}" selected>{{ category }}</option>
+        {% for value, label in form.fields.category.choices %}
+        <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="id_image">Картинка</label><br>
+    <p>Текущая:</p><img src="{{ image.url }}" width="300" height="300" alt="img">
+    <input type="file" name="{{ form.image.name }}" class="form-control" accept="image/*" id="id_image">
+  </div>
+    <div class="form-group">
+    <label for="id_oth_images">Другие картинки (не обязательно)</label>
+    <input type="file" name="{{ form.oth_images.name }}" class="form-control" accept="image/*" multiple id="id_oth_images">
+  </div>
+  <div class="form-group">
+    <label for="id_description">Описание</label>
+      <textarea name="{{ form.description.name }}" cols="20" rows="10" class="form-control" id="id_description" required>{{ description }}</textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="id_price">Цена</label>
+      <input type="number" name="{{ form.price.name }}" required step="0.01" class="form-control" id="id_price" value="{{ price }}">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="id_gender">Пол</label>
+      <select id="id_gender" name="{{ form.gender.name }}" class="form-control" required>
+      <option value="">Выберите...</option>
+        <option value="{{ gender }}" selected>{{ gender }}</option>
+        {% for value, label in form.fields.gender.choices|slice:"1:" %}
+        <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <!--div class="form-group col-md-2">
+      <label for="id_size">Размер</label>
+      <select id="id_size" name="{{ form.size.name }}" class="form-control" required>
+        <option value="">Выберите...</option>
+        {% for value, label in form.fields.size.choices|slice:"1:" %}
+        <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div-->
+    <div class="form-group col-md-2">
+      <p>Текущие размеры:
+        {% for size in sizes %}
+          {{ size }}
+        {% endfor %}</p>
+      <label for="id_size">Размер</label><br>
+        {% for value, label in size_choice %}
+        <input type="checkbox" id="id_size" name="{{ form.size.name }}" value="{{ value }}">
+        <label for="{{ value }}">{{ label }}</label><br>
+        {% endfor %}
+      </input>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="id_size">Цвет</label><br>
+        <p>Текущие цвета:
+          {% for color in colors %}
+            {{ color }}
+          {% endfor %}</p>
+        {% for value, label in color_choice %}
+        <input type="checkbox" id="id_color" name="{{ form.color.name }}" value="{{ value }}">
+        <label for="{{ value }}">{{ label }}</label><br>
+        {% endfor %}
+      </input>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="id_quantity">Доступное количество товара:</label>
+      <input type="number" min="1" step="1" name="{{ form.quantity.name }}" class="form-control" required id="id_quantity" value="{{ quantity }}">
+    </div>
+  </div>
+  <br>
+  <input type="submit" class="btn btn-outline-primary btn-sm" value="Изменить" />
+  <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'category_list' %}">Назад</a>
+</form>
+{% endblock content %}

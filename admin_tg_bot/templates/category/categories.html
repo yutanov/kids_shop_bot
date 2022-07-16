@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Категории
+{% endblock %}
+
+{% block content %}
+          {% if user.is_authenticated %}
+          <div class="jumbotron">
+            <h3>Категории</h3>
+            {{ error }}
+            {% if category_list %}
+              <div class="row">
+              {% for el in category_list %}
+                  <div class="col-md-4">
+                     <div class="border border-secondary">
+                        <a class="navbar-brand text-dark" href="{% url 'category_view' el.id %}">{{ el.title }}</a>
+                     </div>
+                    <br>
+                  </div>
+              {% endfor %}
+              </div>
+            {% else %}
+              <p>Добавьте категорию товара</p>
+            {% endif %}
+              <br>
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'category_new' %}" role="button">Добавить категорию</a>
+          </div>
+          {% else %}
+          <div class="jumbotron">
+            <h1>Login please!</h1>
+            <p class="lead">Here you'll see categories after authentification.</p>
+          </div>
+          {% endif %}
+{% endblock %}

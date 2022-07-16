@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sales
+{% endblock %}
+
+{% block content %}
+          {% if user.is_authenticated %}
+          <div class="jumbotron">
+            <h1>Sales</h1>
+              {% if sales %}
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Название</th>
+                      <th scope="col">Размер</th>
+                      <th scope="col">Цвет</th>
+                      <th scope="col">Цена</th>
+                      <th scope="col">Дата покупки</th>
+                      <th scope="col">Контакты</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for sale in sales %}
+                    <tr>
+                      <th scope="row">{{ sale.product_id }}</th>
+                      <td>{{ sale.product_title }}</td>
+                      <td>{{ sale.product_size }}</td>
+                      <td>{{ sale.product_color }}</td>
+                      <td>{{ sale.product_price }}</td>
+                      <td>{{ sale.created_at }}</td>
+                      <td>{{ sale.contacts }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+                {% else %}
+                <p>Нет данных</p>
+                {% endif %}
+              </div>
+          {% else %}
+          <div class="jumbotron">
+            <h1>Login please!</h1>
+            <p class="lead">Here you'll see sales after authentification.</p>
+          </div>
+          {% endif %}
+{% endblock %}

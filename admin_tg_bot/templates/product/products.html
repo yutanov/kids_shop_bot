@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Товары
+{% endblock %}
+
+{% block content %}
+          {% if user.is_authenticated %}
+          <div class="jumbotron">
+            <h3>Товары</h3>
+            {{ error }}
+            {% if product_list %}
+              {% for el in product_list %}
+               <a class="navbar-brand text-dark" href="{% url 'product_view' el.id %}">{{ el.title }}</a>
+              <br>
+              {% endfor %}
+            {% else %}
+              <p>Добавьте товар</p>
+            {% endif %}
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'product_new' %}" role="button">Добавить товар</a>
+          </div>
+          {% else %}
+          <div class="jumbotron">
+            <h3>Login please!</h3>
+            <p class="lead">Here you'll see categories after authentification.</p>
+          </div>
+          {% endif %}
+{% endblock %}

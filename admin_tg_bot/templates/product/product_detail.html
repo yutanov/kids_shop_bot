@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Товары
+{% endblock %}
+
+{% block content %}
+      <div class="border">
+         <div class="col-md-4">
+            <h3>{{ title }}</h3>
+            {% if image %}
+               <img src="{{ image.url }}" width="300" height="300" alt="img"><br>
+            {% endif %}
+            <br>
+            {% if oth_images %}
+                {% for oth_image in oth_images %}
+                    <img src="/media/{{ oth_image }}" width="150" height="150" alt="img">
+                {% endfor %}
+            {% endif %}
+            <p>{{ description }}</p>
+            <p>{{ gender }}</p>
+            <p>Размеры:
+             {% for size in sizes %}
+                {{ size }}
+             {% endfor %}
+             </p>
+             <p>Цвета:
+             {% for color in colors %}
+                {{ color }}
+             {% endfor %}
+             </p>
+            <p>Цена: {{ price }}</p>
+            <p>Доступное количество: {{ quantity }}</p>
+            </div>
+      </div>
+      <br>
+<p><a class="btn btn-outline-primary btn-sm m-1" href="{% url 'product_edit' pk %}">Изменить товар</a>
+   <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'product_delete' pk %}">Удалить товар</a>
+   <a class="btn btn-outline-primary btn-sm m-1" href="{% url 'category_list' %}">Назад</a></p>
+{% endblock %}
+

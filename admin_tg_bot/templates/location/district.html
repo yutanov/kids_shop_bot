@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регионы
+{% endblock %}
+
+{% block content %}
+          {% if user.is_authenticated %}
+          <div class="jumbotron">
+            <h3>Регионы</h3>
+            {{ error }}
+            {% if region_list %}
+              <div class="row">
+              {% for el in region_list %}
+                  <div class="col-md-4">
+                     <div class="border border-secondary">
+                        <a class="navbar-brand text-dark" href="{% url 'category_view' el.id %}">{{ el.title }}</a>
+                     </div>
+                    <br>
+                  </div>
+              {% endfor %}
+              </div>
+            {% else %}
+              <p>Добавьте регион</p>
+            {% endif %}
+              <br>
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'district_new' %}" role="button">Добавить регион</a>
+          </div>
+          {% else %}
+          <div class="jumbotron">
+            <h1>Login please!</h1>
+            <p class="lead">Here you'll see location info after authentification.</p>
+          </div>
+          {% endif %}
+{% endblock %}
