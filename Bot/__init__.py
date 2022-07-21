@@ -14,7 +14,7 @@ import os
 GENDER, PRODUCT, DETAIL, CART, CHOOSE_PRODUCT, PAY, SAVE_SIZE, SAVE_COLOR, QUANTITY, ADRESS = range(10)
 CATEGORIES = get_categories()
 MEDIA_ROOT = '../admin_tg_bot/media/'
-PAYMENT_TOKEN = '401643678:TEST:e7b5ca7d-5811-43c8-b761-a0b0faaf24a6'
+PAYMENT_TOKEN = 'TOKEN'
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -328,7 +328,7 @@ def precheckout_callback(update: Update, context: CallbackContext) -> None:
 
 
 if __name__ == '__main__':
-    updater = Updater("5214121259:AAGp9kr0JTYnNNNdIZhr9jjDBHoAjmm9Omo")
+    updater = Updater("TOKEN")
 
     conv_handler = ConversationHandler(
         entry_points=[
